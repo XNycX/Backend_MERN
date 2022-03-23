@@ -1,5 +1,5 @@
 const User = require("../models/User.js");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const authConfig = require("../config/auth");
 const jwt = require("jsonwebtoken");
 const transporter = require("../config/nodemailer");
@@ -33,7 +33,7 @@ UserController.register = async (req, res) => {
                       <a href="${url}"> Click para confirmar tu registro</a> `,
     });
     res.send(
-      `${user.name}, Te hemos enviado un correo para confirmar el registro en la web films2022, recuerda revisar tu carpeta SPAM si no ves nuestro correo`
+      `${user.nickname}, Te hemos enviado un correo para confirmar el registro en la web films2022, recuerda revisar tu carpeta SPAM si no ves nuestro correo`
     );
   } catch (error) {
     res.status(400).send(error);
