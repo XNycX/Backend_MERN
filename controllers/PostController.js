@@ -1,15 +1,14 @@
-const Post = require("../models/Post.js");
+const Post = require("../models/post");
 const bcrypt = require("bcryptjs");
 const authConfig = require("../config/auth");
 const jwt = require("jsonwebtoken");
-
 const PostController = {};
 
 PostController.create = async (req, res) => {
    
         const post = req.body;
     
-        const newPost = new Post({ ...post, creatorId: req.userId, createdAt: new Date().toISOString() });
+        const newPost = new Post({ ...post, createdAt: new Date().toISOString() });
     
         try {
             await newPost.save();
@@ -20,3 +19,5 @@ PostController.create = async (req, res) => {
         }
     
 };
+
+(module.exports = PostController);
