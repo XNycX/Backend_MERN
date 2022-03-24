@@ -54,5 +54,19 @@ PostController.getSomePosts = async (req,res) => {
 
 };
 
+PostController.deletePostById = async (req,res) => {
+
+     
+    try {
+        res.json(await db.post.deleteOne({ id: _id}, 'The post has been deleted succesfully'));
+
+       // res.status(201).json(newPost);
+    } catch (error) {
+        res.status(409).json({ message: error.message });
+    }
+
+
+};
+
 
 (module.exports = PostController);
