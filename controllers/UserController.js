@@ -25,6 +25,7 @@ UserController.register = async (req, res) => {
     const emailToken = jwt.sign({ email: req.body.email }, authConfig.secret, {
       expiresIn: authConfig.expires,
     });
+    console.log(emailToken);
     const url = "http://localhost:5500/users/confirm/" + emailToken;
     await transporter.sendMail({
       to: req.body.email,

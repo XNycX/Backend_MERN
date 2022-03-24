@@ -9,7 +9,7 @@ PostController.create = async (req, res) => {
    
         const post = req.body;
     
-        const newPost = new PostMessage({ ...post, creator: req.userId, createdAt: new Date().toISOString() });
+        const newPost = new Post({ ...post, createdAt: new Date().toISOString() });
     
         try {
             await newPost.save();
@@ -20,3 +20,5 @@ PostController.create = async (req, res) => {
         }
     
 };
+
+(module.exports = PostController);

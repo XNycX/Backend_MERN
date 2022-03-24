@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const PostSchema = new Schema ({
     creatorId: {
-        type: Number,
+        type: String,
         required: true,
         unique: true
     },
