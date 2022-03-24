@@ -17,16 +17,11 @@
 //   };
 
 PostController.deletePostById = async (req, res) => {
-    let id = req.params.id;
+  let id = req.body._id;
     try {
-     await Movie.destroy({
-        where: {
-          id: id,
-        },
-        truncate: false,
-      });
-      res.send({message:`Se ha eliminado la pelicula ${id}`,id});
-    } catch (error) {
+      await Post.findOneAndRemove({ _id: id },
+      res.send({message:`Se ha eliminado el usuario ${id}`,id}));
+    }catch (error) {
       res.send(error);
     }
-  };
+};
