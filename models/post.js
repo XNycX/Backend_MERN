@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const PostSchema = new Schema ({
     creatorId: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId, ref: "User",
         required: true,
         unique: true
     },
