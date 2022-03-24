@@ -34,7 +34,7 @@ UserController.register = async (req, res) => {
                       <a href="${url}"> Click para confirmar tu registro</a> `,
     });
     res.send(
-      `${user.name}, Te hemos enviado un correo para confirmar el registro en la web films2022, recuerda revisar tu carpeta SPAM si no ves nuestro correo`
+      `${user.nickname}, Te hemos enviado un correo para confirmar el registro en la web films2022, recuerda revisar tu carpeta SPAM si no ves nuestro correo`
     );
   } catch (error) {
     res.status(400).send(error);
@@ -51,4 +51,35 @@ UserController.register = async (req, res) => {
     console.error(error);
   }
 }),
-  (module.exports = UserController);
+  (UserController.deleteById = async (req, res) => {
+    let id = req.body._id;
+    try {
+      await User.findOneAndRemove(
+        { _id: id },
+        res.send({ message: `Se ha eliminado el usuario ${id}`, id })
+      );
+    } catch (error) {
+      res.send(error);
+    }
+  });
+
+UserController.getAllUsers = async (req, res) => {
+  try {
+    res.json(await User.find());
+
+    // res.status(201).json(newUser);
+  } catch (error) {
+    res.status(409).json({ message: error.message });
+  }
+};
+
+UserController.getUserByNickname = async (req, res) => {
+  let nickname = req.body.nickname;
+  try {
+    res.json(await User.findOne({ nickname }));
+  } catch (error) {
+    res.status(409).json({ message: error.message });
+  }
+};
+
+module.exports = UserController;
