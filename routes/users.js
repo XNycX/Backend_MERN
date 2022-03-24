@@ -9,5 +9,6 @@ router.get('/confirm/:emailToken', UserController.confirmEmail);
 router.delete('/delete', UserController.deleteById);
 router.get('/', UserController.getAllUsers);
 router.get('/nickname', UserController.getUserByNickname);
+router.post('/followers', UserController.following);
 
 module.exports = router;

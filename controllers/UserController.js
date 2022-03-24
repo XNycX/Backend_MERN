@@ -82,4 +82,29 @@ UserController.getUserByNickname = async (req, res) => {
   }
 };
 
+UserController.following = async (req, res) => {
+
+  let _id = req.body._id
+
+  let id_follower = req.body.follower
+
+  // Enviar Mensaje al usuario que ya sigue a esa persona
+  try {
+      await User.findOneAndUpdate(
+          { _id: _id },
+          {
+              $push: {
+                  followers: {
+                      "follower": id_follower
+                  }
+              }
+          }
+      )
+      res.send("Has Comenzado a seguir a esta persona")
+
+  } catch (error) {
+      res.send(error)
+  }
+}
+
 module.exports = UserController;
