@@ -8,6 +8,7 @@ const PostController = require('../controllers/PostController');
 router.post('/create', PostController.create);
 router.get('/getAll', PostController.getAllPosts);
 router.get('/getSome', PostController.getSomePosts);
+router.delete('/deleteId', PostController.deletePostById);
 
 //Exporto router para que pueda ser importado desde otros ficheros una vez ha ejecutado la lógica de éste(siempre igual)
 module.exports = router;
