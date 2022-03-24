@@ -6,7 +6,7 @@ const authentication = async (req, res, next) => {
     try {
         const token = req.headers.authorization;
         const payload = jwt.verify(token, authConfig.secret);
-        const user = await User.findByPk(payload.id);
+        const user = await User.findById(payload._id);
         if (!user ) {
             res.status(401).send({ message: 'No estas autorizado' });
         }
