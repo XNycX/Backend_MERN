@@ -7,6 +7,7 @@ const PostController = require('../controllers/PostController');
 // Recibe por body un json con los datos del post y los guarda en la BBDD
 router.post('/create', PostController.create);
 router.get('/getAll', PostController.getAllPosts);
+router.get('/getSome', PostController.getSomePosts);
 
 //Exporto router para que pueda ser importado desde otros ficheros una vez ha ejecutado la lógica de éste(siempre igual)
 module.exports = router;

@@ -40,4 +40,19 @@ PostController.getAllPosts = async (req,res) => {
 
 };
 
+PostController.getSomePosts = async (req,res) => {
+
+    let userId = req.body.creatorId;
+    try {
+        res.json(await Post.find({ creatorId: userId }, 'title message').exec());
+
+       // res.status(201).json(newPost);
+    } catch (error) {
+        res.status(409).json({ message: error.message });
+    }
+
+
+};
+
+
 (module.exports = PostController);
