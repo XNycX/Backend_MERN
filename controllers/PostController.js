@@ -54,19 +54,17 @@ PostController.getSomePosts = async (req,res) => {
 
 };
 
-PostController.deletePostById = async (req,res) => {
-
-     
+(PostController.deletePostById = async (req, res) => {
+    let id = req.body._id;
     try {
-        res.json(await db.post.deleteOne({ id: _id}, 'The post has been deleted succesfully'));
-
-       // res.status(201).json(newPost);
+      await Post.findOneAndRemove(
+        { _id: id },
+        res.send({ message: `The post with id: ${id} has been deleted succesfully`, id })
+      );
     } catch (error) {
-        res.status(409).json({ message: error.message });
+      res.send(error);
     }
-
-
-};
+  });
 
 
 (module.exports = PostController);
