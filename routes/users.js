@@ -10,5 +10,6 @@ router.delete('/delete', UserController.deleteById);
 router.get('/', UserController.getAllUsers);
 router.get('/nickname', UserController.getUserByNickname);
 router.post('/followers', UserController.following);
+router.post('/login', UserController.login);
 
 module.exports = router;
