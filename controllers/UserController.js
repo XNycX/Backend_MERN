@@ -50,4 +50,35 @@ UserController.register = async (req, res) => {
     console.error(error);
   }
 }),
-  (module.exports = UserController);
+  (UserController.deleteById = async (req, res) => {
+    let id = req.body._id;
+    try {
+      await User.findOneAndRemove(
+        { _id: id },
+        res.send({ message: `Se ha eliminado el usuario ${id}`, id })
+      );
+    } catch (error) {
+      res.send(error);
+    }
+  });
+
+UserController.getAllUsers = async (req, res) => {
+  try {
+    res.json(await User.find());
+
+    // res.status(201).json(newUser);
+  } catch (error) {
+    res.status(409).json({ message: error.message });
+  }
+};
+
+UserController.getUserByNickname = async (req, res) => {
+  let nickname = req.body.nickname;
+  try {
+    res.json(await User.findOne({ nickname }));
+  } catch (error) {
+    res.status(409).json({ message: error.message });
+  }
+};
+
+module.exports = UserController;
