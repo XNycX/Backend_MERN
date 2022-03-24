@@ -24,11 +24,13 @@ const UserSchema = new Schema ({
     },
     city: {
         type: String,
-        required: false
+        required: false,
+        default: ""
     },
     image_path: {
         type: String,
-        required: false
+        required: false,
+        default: ""
     },
     followers: {
         type: Array,

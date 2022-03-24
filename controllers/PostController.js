@@ -1,27 +1,58 @@
-// const { Post, User } = require("../models");
-// const PostController = {};
+const Post = require("../models/Post.js");
+const bcrypt = require("bcryptjs");
+const authConfig = require("../config/auth");
+const jwt = require("jsonwebtoken");
+const ObjectId = require('mongoose').Types.ObjectId;
 
-// PostController.updatePost = (req, res) => {
-//     let data = req.body;
-  
-//     let id = req.params.id;
-//     Post.update(data, {
-//       .where() {
-//         id: id,
-//       },
-//     })
-//       .then((updated) => {
-//         res.send(updated);
-//       })
-//       .catch((error) => res.send(error));
-//   };
+const PostController = {};
 
-PostController.deletePostById = async (req, res) => {
-  let id = req.body._id;
-    try {
-      await Post.findOneAndRemove({ _id: id },
-      res.send({message:`Se ha eliminado el usuario ${id}`,id}));
-    }catch (error) {
-      res.send(error);
-    }
+PostController.create = async (req, res) => {
+   
+        const post = {
+            creatorId : ObjectId(req.body.creatorId),
+            title : req.body.title,
+            message : req.body.message,
+            createdAt : new Date().toISOString()
+        }
+    
+        const newPost = new Post({ ...post});
+    
+        try {
+            await newPost.save();
+    
+            res.status(201).json(newPost);
+        } catch (error) {
+            res.status(409).json({ message: error.message });
+        }
+    
 };
+
+PostController.getAllPosts = async (req,res) => {
+
+    try {
+        res.json(await Post.find().populate('creatorId'));
+
+       // res.status(201).json(newPost);
+    } catch (error) {
+        res.status(409).json({ message: error.message });
+    }
+
+
+};
+
+PostController.getSomePosts = async (req,res) => {
+
+    let userId = req.body.creatorId;
+    try {
+        res.json(await Post.find({ creatorId: userId }, 'title message').exec());
+
+       // res.status(201).json(newPost);
+    } catch (error) {
+        res.status(409).json({ message: error.message });
+    }
+
+
+};
+
+
+(module.exports = PostController);
