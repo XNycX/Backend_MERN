@@ -117,8 +117,8 @@ PostController.likes = async (req, res) => {
     let id = ObjectId(req.params.id);
 
     try {
-    //    Post.updateOne({ _id: id }, { title: req.body.title }, { message: req.body.message })
-     let response = await Post.updateOne(
+     Post.updateOne({ _id: id }, { title: req.body.title }, { message: req.body.message })
+     await Post.updateOne(
          { id: id }, {
              $set: {
                  title: req.body.title,
