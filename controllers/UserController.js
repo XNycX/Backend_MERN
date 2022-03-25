@@ -107,6 +107,29 @@ UserController.following = async (req, res) => {
   }
 };
 
+UserController.unfollowing = async (req, res) => {
+
+  let _id = req.body._id
+
+  let id_follower = req.body.follower
+
+  try {
+      await User.findOneAndUpdate(
+          { _id: _id },
+          {
+              $pull: {
+                  followers: {
+                      "follower": id_follower
+                  }
+              }
+          }
+      )
+      res.send(`Has dejado de seguir a ${id_follower}.`)
+
+  } catch (error) {
+      res.send(error)
+  }
+};
   UserController.login = (req, res) => {
     let password = req.body.password;
     let email = req.body.email;
