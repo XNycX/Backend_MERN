@@ -4,17 +4,17 @@ const Schema = mongoose.Schema;
 const UserSchema = new Schema ({
     email: {
         type: String,
-        required: true,
+        required: [true,'El email es obligatorio introducirlo'],
         unique: true,
         lowercase: true
     },
     password: {
         type: String,
-        required: true
+        required: [true,'El password es obligatorio introducirlo'],
     },
     nickname: {
         type: String,
-        required: true,
+        required: [true,'El nickname es obligatorio introducirlo'],
         unique: true,
     },
     role: {
