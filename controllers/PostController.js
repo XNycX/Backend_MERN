@@ -113,5 +113,24 @@ PostController.likes = async (req, res) => {
         res.send(error)
     }
   };
+  PostController.editPost = async (req, res) => {
+    let id = ObjectId(req.params.id);
+
+    try {
+    //    Post.updateOne({ _id: id }, { title: req.body.title }, { message: req.body.message })
+     let response = await Post.updateOne(
+         { id: id }, {
+             $set: {
+                 title: req.body.title,
+                 message: req.body.message
+                    }
+                }, {returnNewDocument: true}
+            )
+        res.status(200).json( {msg:"Has modificado este post"}) 
+} catch (error) {
+    res.status(500).json({ msg: `Tu mensaje`, error: { name: error.name, message: error.message, detail: error } });
+}
+};
+        
 
 (module.exports = PostController);

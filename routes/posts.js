@@ -11,6 +11,7 @@ router.get('/getSome', PostController.getSomePosts);
 router.delete('/deleteId', PostController.deletePostById);
 router.post('/addLike', PostController.likes);
 router.post('/unlike', PostController.unlikes);
+router.put('/edit/:id', PostController.editPost);
 
 //Exporto router para que pueda ser importado desde otros ficheros una vez ha ejecutado la lógica de éste(siempre igual)
 module.exports = router;
