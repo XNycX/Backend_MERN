@@ -16,12 +16,12 @@ const PostSchema = new Schema ({
         required: true
     },
     coments: {
-        type: [String],
+        type: Array,
         required: false,
         default: []
     },
     likes: {
-        type: [String],
+        type: Array,
         required: false,
         default: []
     },
