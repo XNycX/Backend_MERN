@@ -90,4 +90,28 @@ PostController.likes = async (req, res) => {
     }
   };
 
+  PostController.unlikes = async (req, res) => {
+
+    let _id = req.body._id
+  
+    let id_postLiked = req.body._id
+  
+    try {
+        await Post.findOneAndUpdate(
+            { _id: _id },
+            {
+                $pull: {
+                    likes: {
+                        "postLiked": id_postLiked
+                    }
+                }
+            }
+        )
+        res.send("Has quitado un like a este post")
+  
+    } catch (error) {
+        res.send(error)
+    }
+  };
+
 (module.exports = PostController);
