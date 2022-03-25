@@ -6,11 +6,13 @@ const UserController = require('../controllers/UserController');
 // http://localhost:5500/users/register (usando un POST).
 router.post('/register', UserController.register);
 router.get('/confirm/:emailToken', UserController.confirmEmail);
-router.delete('/delete', UserController.deleteById);
+router.delete('/delete', authentication, UserController.deleteById);
 router.get('/', UserController.getAllUsers);
 router.get('/nickname', UserController.getUserByNickname);
-router.post('/followers', UserController.following);
-router.post('/unfollow', UserController.unfollowing);
+router.post('/following', authentication, UserController.following);
+router.post('/unfollowing', authentication, UserController.unfollowing);
+router.post('/followers', authentication, UserController.followers);
+router.post('/unfollowed', authentication, UserController.unfollowed);
 router.post('/login', UserController.login);
 
 module.exports = router;
