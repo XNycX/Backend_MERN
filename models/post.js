@@ -9,11 +9,11 @@ const PostSchema = new Schema ({
     },
     title: {
         type: String,
-        required: true
+        required: [true,'El titulo es obligatorio introducirlo'],
     },
     message: {
         type: String,
-        required: true
+        required: [true,'El mensaje es obligatorio introducirlo'],
     },
     coments: {
         type: Array,
