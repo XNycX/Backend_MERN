@@ -179,7 +179,7 @@ UserController.unfollowing = async (req, res) => {
       res.send(error)
   }
 };
-  UserController.login = (req, res) => {
+UserController.login = (req, res) => {
     let password = req.body.password;
     let email = req.body.email;
     User.findOne({email: req.body.email}).then((User) => {
@@ -206,7 +206,7 @@ UserController.unfollowing = async (req, res) => {
       });
       res.send({ message: `Bienvenid@ ${User.nickname}, tu token es: ${token}` });
     });
-  };
+};
 
 
 module.exports = UserController;
