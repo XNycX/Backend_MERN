@@ -1,4 +1,4 @@
-const Comment = require("../models/Comment.js");
+const Comment = require("../models/comments.js");
 const ObjectId = require('mongoose').Types.ObjectId;
 
 const CommentController = {};
