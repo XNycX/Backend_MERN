@@ -17,7 +17,7 @@ const UserSchema = new Schema ({
         type: String,
         required: [true,'El nickname es obligatorio introducirlo'],
         unique: true,
-        match:[/^([a-zA-Z0-9@*#]{3,8})$/,"Por favor, introduce un nickname válido"],
+        match:[/^([a-zA-Z0-9@*#]{3,15})$/,"Por favor, introduce un nickname válido, como maxímo de 15 carácteres y minimo 3"],
     },
     role: {
         type: String,
