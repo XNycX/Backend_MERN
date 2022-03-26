@@ -14,7 +14,8 @@ router.post('/unfollowing', authentication, UserController.unfollowing);
 router.post('/followers', authentication, UserController.followers);
 router.post('/unfollowed', authentication, UserController.unfollowed);
 router.post('/login', UserController.login);
-router.put('/edit',authentication, UserController.updateUser);
+router.put('/edit', authentication, UserController.updateUser);
+router.put('/updatePassword',authentication, UserController.updatePassword);
 router.delete('/delete', UserController.deleteById);
 
 module.exports = router;

@@ -1,7 +1,4 @@
 const Post = require("../models/Post.js");
-const bcrypt = require("bcryptjs");
-const authConfig = require("../config/auth");
-const jwt = require("jsonwebtoken");
 const ObjectId = require('mongoose').Types.ObjectId;
 
 const PostController = {};

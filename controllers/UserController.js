@@ -226,4 +226,36 @@ UserController.updateUser = async (req, res) => {
   }
 };
 
+UserController.updatePassword = (req, res) => {
+  let id = req.user._id;
+
+  let oldPassword = req.body.oldPassword;
+  let newPassword = req.body.newPassword;
+  
+  User.findById( id )
+    .then((userFound) => {
+        if (bcrypt.compareSync(oldPassword, userFound.password)) {
+          newPassword = bcrypt.hashSync(
+            newPassword,
+           +authConfig.rounds
+          );
+          User.findByIdAndUpdate(id, { password: newPassword},)
+            .then((updated) => {
+              console.log(updated)
+              res.send(updated);
+            })
+            .catch((error) => {
+              res
+                .status(401)
+                .json({ msg: `Ha ocurrido un error actualizando el password`,error: { name: error.name, message: error.message, detail: error } });
+            });
+        } else {
+          res.status(401).json({ msg: "Usuario o contraseña inválidos" });
+        }
+    })
+    .catch((error) => {
+      res.send(error);
+    });
+};
+
 module.exports = UserController;
