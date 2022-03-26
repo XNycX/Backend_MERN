@@ -1,15 +1,11 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const PostSchema = new Schema ({
+const CommentSchema = new Schema ({
     creatorId: {
         type: mongoose.Schema.Types.ObjectId, ref: "User",
-    //    required: true,
-    //    unique: true
-    },
-    title: {
-        type: String,
-        required: [true,'El titulo es obligatorio introducirlo'],
+        required: true,
+        unique: true
     },
     message: {
         type: String,
@@ -27,5 +23,5 @@ const PostSchema = new Schema ({
     }
 });
 
-const Post = mongoose.model("Post", PostSchema);
-module.exports = Post;
+const Comments = mongoose.model("Comments", CommentSchema);
+module.exports = Comments;
