@@ -25,7 +25,7 @@ UserController.register = async (req, res) => {
     const emailToken = jwt.sign({ email: req.body.email }, authConfig.secret, {
       expiresIn: authConfig.expires,
     });
-    const url = "http://localhost:5500/users/confirm/" + emailToken;
+    const url = "https://mernsocialbackend.herokuapp.com/users/" + emailToken;
     await transporter.sendMail({
       to: req.body.email,
       subject: "Confirme su registro en la red social",

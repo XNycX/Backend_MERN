@@ -3,7 +3,7 @@ const router = express.Router();
 const { authentication, isAdmin } = require('../middleware/authentication');
 const UserController = require('../controllers/UserController');
 
-// http://localhost:5500/users/register (usando un POST).
+// http://localhost:5500/users/register || https://mernsocialbackend.herokuapp.com/users/ (usando un POST).
 router.post('/register', UserController.register);
 router.get('/confirm/:emailToken', UserController.confirmEmail);
 router.delete('/delete', authentication, UserController.deleteById);
