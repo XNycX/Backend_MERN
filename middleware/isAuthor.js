@@ -1,4 +1,4 @@
-const Post = require("../models/Post");
+const Post = require("../models/post.js");
 
 const isAuthor_Post = async (req, res, next) => {
   try {
