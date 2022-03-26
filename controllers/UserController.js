@@ -182,29 +182,29 @@ UserController.unfollowing = async (req, res) => {
 UserController.login = (req, res) => {
     let password = req.body.password;
     let email = req.body.email;
-    User.findOne({email: req.body.email}).then((User) => {
-      if (!User) {
+    User.findOne({email: req.body.email}).then((user) => {
+      if (!user) {
         return res
           .status(400)
           .send({ message: "Usuario o contraseña incorrectos" });
       }
-      const isMatch = bcrypt.compareSync(password, User.password);
+      const isMatch = bcrypt.compareSync(password, user.password);
       if (!isMatch) {
         return res
           .status(400)
           .send({ message: "Usuario o contraseña incorrectos" });
       }
-      if (!User.confirmed) {
+      if (!user.confirmed) {
         return res.status(400).send({
           message:
             "Debes confirmar tu correo, recuerda revisar tu carpeta de SPAM si no ves nuestro correo de confirmación",
         });
       }
 
-      token = jwt.sign({ _id: User._id }, authConfig.secret, {
+      token = jwt.sign({ _id: user._id }, authConfig.secret, {
         expiresIn: authConfig.expires,
       });
-      res.send({ message: `Bienvenid@ ${User.nickname}, tu token es: ${token}` });
+      res.send({ message: `Bienvenid@ ${user.nickname}, tu token es: ${token}` });
     });
 };
 
