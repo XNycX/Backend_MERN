@@ -29,12 +29,12 @@ UserController.register = async (req, res) => {
     const url = "http://localhost:5500/users/confirm/" + emailToken;
     await transporter.sendMail({
       to: req.body.email,
-      subject: "Confirme su registro en films2022",
+      subject: "Confirme su registro en la red social",
       html: `<h3>Bienvenido, estás a un paso de registrarte </h3>
                       <a href="${url}"> Click para confirmar tu registro</a> `,
     });
     res.send(
-      `${user.nickname}, Te hemos enviado un correo para confirmar el registro en la web films2022, recuerda revisar tu carpeta SPAM si no ves nuestro correo`
+      `${user.nickname}, Te hemos enviado un correo para confirmar el registro en la web de la red social, recuerda revisar tu carpeta SPAM si no ves nuestro correo`
     );
   } catch (error) {
     res.status(400).send(error);
