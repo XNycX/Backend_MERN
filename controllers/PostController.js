@@ -65,9 +65,9 @@ PostController.deletePostById = async (req, res) => {
 
 PostController.likes = async (req, res) => {
 
-    let _id = req.body._id
+    let _id = req.body._id;
   
-    let id_postLiked = req.body._id
+    let id_like = req.body.like;
   
     try {
         await Post.findOneAndUpdate(
@@ -75,11 +75,11 @@ PostController.likes = async (req, res) => {
             {
                 $push: {
                     likes: {
-                        "postLiked": id_postLiked
-                    }
-                }
-            }
-        )
+                        likes: id_like
+                    },
+                },
+            },
+        );
         res.send("Has dado like a este post")
   
     } catch (error) {
