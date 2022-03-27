@@ -52,11 +52,11 @@ PostController.getSomePosts = async (req,res) => {
 };
 
 PostController.deletePostById = async (req, res) => {
-    let id = req.body._id;
+    let _id = req.params._id;
     try {
       await Post.findOneAndRemove(
-        { _id: id },
-        res.send({ message: `The post with id: ${id} has been deleted succesfully`, id })
+        { _id: _id },
+        res.send({ message: `The post with id: ${_id} has been deleted succesfully`, _id })
       );
     } catch (error) {
       res.send(error);
@@ -65,18 +65,16 @@ PostController.deletePostById = async (req, res) => {
 
 PostController.likes = async (req, res) => {
 
-    let _id = req.body._id;
+    let _id = req.params._id;
   
-    let id_like = req.body.like;
+    let id_userLike = req.user._id;
   
     try {
         await Post.findOneAndUpdate(
             { _id: _id },
             {
                 $push: {
-                    likes: {
-                        likes: id_like
-                    },
+                    likes: id_userLike
                 },
             },
         );
@@ -89,18 +87,17 @@ PostController.likes = async (req, res) => {
 
   PostController.unlikes = async (req, res) => {
 
-    let _id = req.body._id
+    let _id = req.params._id
   
-    let id_postLiked = req.body._id
+    let id_postLiked = req.user._id
   
     try {
         await Post.findOneAndUpdate(
             { _id: _id },
             {
                 $pull: {
-                    likes: {
-                        "postLiked": id_postLiked
-                    }
+                    likes: id_postLiked
+                    
                 }
             }
         )
@@ -111,12 +108,11 @@ PostController.likes = async (req, res) => {
     }
   };
   PostController.editPost = async (req, res) => {
-    let id = ObjectId(req.params.id);
+    let _id = req.params._id;
 
     try {
-    Post.updateOne({ _id: id }, { title: req.body.title }, { message: req.body.message })
       await Post.updateOne(
-         { id: id }, {
+         { _id: _id }, {
              $set: {
                  title: req.body.title,
                  message: req.body.message
