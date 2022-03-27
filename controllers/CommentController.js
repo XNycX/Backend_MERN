@@ -49,11 +49,11 @@ CommentController.getSomeComments = async (req,res) => {
 };
 
 CommentController.deleteCommentById = async (req, res) => {
-    let id = req.body._id;
+    let _id = req.params._id;
     try {
       await Comment.findOneAndRemove(
-        { _id: id },
-        res.send({ message: `The Comment with id: ${id} has been deleted succesfully`, id })
+        { _id: _id },
+        res.send({ message: `The Comment with id: ${_id} has been deleted succesfully`, _id })
       );
     } catch (error) {
       res.send(error);
@@ -62,18 +62,16 @@ CommentController.deleteCommentById = async (req, res) => {
 
 CommentController.likes = async (req, res) => {
 
-    let _id = req.body._id
+    let _id = req.params._id
   
-    let id_commentLiked = req.body._id
+    let id_userLike = req.user._id
   
     try {
         await Comment.findOneAndUpdate(
             { _id: _id },
             {
                 $push: {
-                    likes: {
-                        "commentLiked": id_commentLiked
-                    }
+                    likes: id_userLike    
                 }
             }
         )
@@ -86,18 +84,16 @@ CommentController.likes = async (req, res) => {
 
   CommentController.unlikes = async (req, res) => {
 
-    let _id = req.body._id
+    let _id = req.params._id
   
-    let id_commentLiked = req.body._id
+    let id_userLike = req.user._id
   
     try {
         await Comment.findOneAndUpdate(
             { _id: _id },
             {
                 $pull: {
-                    likes: {
-                        "commentLiked": id_commentLiked
-                    }
+                    likes: id_userLike
                 }
             }
         )
@@ -108,12 +104,11 @@ CommentController.likes = async (req, res) => {
     }
   };
   CommentController.editComment = async (req, res) => {
-    let id = ObjectId(req.params.id);
+    let _id = req.params._id;
 
     try {
-    Comment.updateOne({ _id: id }, { title: req.body.title }, { message: req.body.message })
       await Comment.updateOne(
-         { id: id }, {
+         { id: _id }, {
              $set: {
                  message: req.body.message
                     }

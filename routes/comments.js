@@ -8,10 +8,10 @@ const CommentController = require('../controllers/CommentController');
 router.post('/create', CommentController.create);
 router.get('/getAll', CommentController.getAllComment);
 router.get('/getSome', CommentController.getSomecomments);
-router.delete('/deleteId', authentication, isAuthor_Comment, CommentController.deleteCommentById);
-router.post('/addLike', authentication, CommentController.likes);
-router.post('/unlike', authentication, CommentController.unlikes);
-router.put('/edit/:id', authentication, isAuthor_Comment, CommentController.editComment);
+router.delete('/deleteId/:_id', authentication, isAuthor_Comment, CommentController.deleteCommentById);
+router.post('/addLike/:_id', authentication, CommentController.likes);
+router.post('/unlike/:_id', authentication, CommentController.unlikes);
+router.put('/edit/:_id', authentication, isAuthor_Comment, CommentController.editComment);
 
 //Exporto router para que pueda ser importado desde otros ficheros una vez ha ejecutado la lógica de éste(siempre igual)
 module.exports = router;

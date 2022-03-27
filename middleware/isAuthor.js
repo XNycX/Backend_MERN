@@ -4,7 +4,6 @@ const isAuthor_Post = async (req, res, next) => {
   let idPost = req.params._id;
   try {
     const post = await Post.findById(idPost);
-    console.log(post)
     if (post.creatorId.toString() !== req.user._id.toString()) {
       return res.status(403).send({ message: "No eres el creador de este post" });
     }

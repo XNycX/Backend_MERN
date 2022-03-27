@@ -82,7 +82,7 @@ UserController.getUserByNickname = async (req, res) => {
 };
 //Para seguir a otro usuario
 UserController.following = async (req, res) => {
-  let _id = req.body._id;
+  let _id = req.user._id;
 
   let id_userToFollow = req.body.following;
 
@@ -92,9 +92,7 @@ UserController.following = async (req, res) => {
       { _id: _id },
       {
         $push: {
-          following: {
-            following: id_userToFollow,
-          },
+          following: id_userToFollow
         },
       }
     );
@@ -105,7 +103,7 @@ UserController.following = async (req, res) => {
 };
 //Para añadir un seguidor a un usuario
 UserController.followers = async (req, res) => {
-  let _id = req.body._id;
+  let _id = req.user._id;
 
   let id_follower = req.body.follower;
 
@@ -115,9 +113,7 @@ UserController.followers = async (req, res) => {
       { _id: _id },
       {
         $push: {
-          followers: {
-            followers: id_follower,
-          },
+          followers: id_follower
         },
       }
     );
@@ -128,7 +124,7 @@ UserController.followers = async (req, res) => {
 };
 //Para quitar un seguidor a un usuario
 UserController.unfollowed = async (req, res) => {
-  let _id = req.body._id;
+  let _id = req.user._id;
 
   let id_follower = req.body.follower;
 
@@ -137,9 +133,7 @@ UserController.unfollowed = async (req, res) => {
       { _id: _id },
       {
         $pull: {
-          followers: {
-            followed: id_follower,
-          },
+          followers: id_follower
         },
       }
     );
@@ -150,18 +144,16 @@ UserController.unfollowed = async (req, res) => {
 };
 //Para dejar de seguir a un usuario
 UserController.unfollowing = async (req, res) => {
-  let _id = req.body._id;
+  let _id = req.user._id;
 
-  let id_userToUnfollow = req.body.unfollowed;
+  let id_userToUnfollow = req.body.unfollowing;
 
   try {
     await User.findOneAndUpdate(
       { _id: _id },
       {
         $pull: {
-          following: {
-            following: id_userToUnfollow,
-          },
+          following: id_userToUnfollow
         },
       }
     );
