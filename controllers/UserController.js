@@ -40,7 +40,7 @@ UserController.register = async (req, res) => {
   }
 };
 
-(UserController.confirmEmail = async (req, res) => {
+UserController.confirmEmail = async (req, res) => {
   try {
     const token = req.params.emailToken;
     const payload = jwt.verify(token, authConfig.secret);
@@ -49,18 +49,18 @@ UserController.register = async (req, res) => {
   } catch (error) {
     console.error(error);
   }
-}),
-  (UserController.deleteById = async (req, res) => {
-    let _id = req.params._id;
-    try {
-      await User.findOneAndRemove(
-        { _id: _id },
-        res.send({ message: `Se ha eliminado el usuario ${_id}`, _id })
-      );
-    } catch (error) {
-      res.send(error);
-    }
-  });
+};
+UserController.deleteById = async (req, res) => {
+  let _id = req.params._id;
+  try {
+    await User.findOneAndRemove(
+      { _id: _id },
+      res.send({ message: `Se ha eliminado el usuario ${_id}`, _id })
+    );
+  } catch (error) {
+    res.send(error);
+  }
+};
 
 UserController.getAllUsers = async (req, res) => {
   try {
