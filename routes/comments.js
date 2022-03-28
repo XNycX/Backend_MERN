@@ -5,8 +5,8 @@ const { isAuthor_Comment } = require('../middleware/isAuthor');
 const CommentController = require('../controllers/CommentController');
 
 router.post('/create', CommentController.create);
-router.get('/getAll', CommentController.getAllComment);
-router.get('/getSome', CommentController.getSomecomments);
+router.get('/getAll', CommentController.getAllComments);
+router.get('/getSome', CommentController.getSomeComments);
 router.delete('/deleteId/:_id', authentication, isAuthor_Comment, CommentController.deleteCommentById);
 router.post('/addLike/:_id', authentication, CommentController.likes);
 router.post('/unlike/:_id', authentication, CommentController.unlikes);
