@@ -51,11 +51,11 @@ UserController.register = async (req, res) => {
   }
 }),
   (UserController.deleteById = async (req, res) => {
-    let id = req.body._id;
+    let _id = req.params._id;
     try {
       await User.findOneAndRemove(
-        { _id: id },
-        res.send({ message: `Se ha eliminado el usuario ${id}`, id })
+        { _id: _id },
+        res.send({ message: `Se ha eliminado el usuario ${_id}`, _id })
       );
     } catch (error) {
       res.send(error);

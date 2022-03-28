@@ -6,7 +6,7 @@ const UserController = require('../controllers/UserController');
 // http://localhost:5500/users/register || https://mernsocialbackend.herokuapp.com/users/ (usando un POST).
 router.post('/register', UserController.register);
 router.get('/confirm/:emailToken', UserController.confirmEmail);
-router.delete('/delete', authentication, UserController.deleteById);
+router.delete('/deleteId/:_id', authentication, UserController.deleteById);
 router.get('/', UserController.getAllUsers);
 router.get('/nickname', UserController.getUserByNickname);
 router.post('/following', authentication, UserController.following);
@@ -16,6 +16,5 @@ router.post('/unfollowed', authentication, UserController.unfollowed);
 router.post('/login', UserController.login);
 router.put('/edit', authentication, UserController.updateUser);
 router.put('/updatePassword',authentication, UserController.updatePassword);
-router.delete('/delete', UserController.deleteById);
 
 module.exports = router;
