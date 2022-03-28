@@ -1,26 +1,25 @@
 const Comment = require("../models/comments.js");
+const Post = require("../models/post.js");
 const ObjectId = require('mongoose').Types.ObjectId;
 
 const CommentController = {};
 
 CommentController.create = async (req, res) => {
-   
         const comment = {
-            creatorId: ObjectId(req.user._id),
-            postId: ObjectId(req.body.postId),
+            creatorId: req.user._id,
+            postId: req.body.postId,
             message : req.body.message,
             createdAt : new Date().toISOString()
         }
-    
+
         const newComment = new Comment({ ...comment});
-    
-        try {
-            await newComment.save();
-    
-            res.status(201).json(newComment);
-        } catch (error) {
-            res.status(409).json({ message: error.message });
-        }
+    try {
+        await newComment.save();
+        await Post.findByIdAndUpdate(comment.postId, {$push: { commentsId: newComment._id }});
+        res.status(201).json(newComment);
+    } catch (error) {
+        res.status(409).json({ message: error.message });
+    }
     
 };
 

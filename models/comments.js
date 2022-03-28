@@ -4,13 +4,11 @@ const Schema = mongoose.Schema;
 const CommentSchema = new Schema ({
     creatorId: {
         type: mongoose.Schema.Types.ObjectId, ref: "User",
-        required: true,
-        unique: true
+        required: true
     },
     postId: {
         type: mongoose.Schema.Types.ObjectId, ref: "Post",
-        required: true,
-        unique: false
+        required: true
     },
     message: {
         type: String,

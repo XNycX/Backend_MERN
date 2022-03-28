@@ -186,7 +186,7 @@ UserController.login = (req, res) => {
     token = jwt.sign({ _id: user._id }, authConfig.secret, {
       expiresIn: authConfig.expires,
     });
-    res.send({ message: `Bienvenid@ ${user.nickname}`,token });
+    res.send({ message: `Bienvenid@ ${user.nickname}`,token,user });
   });
 };
 UserController.updateUser = async (req, res) => {

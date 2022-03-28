@@ -4,9 +4,10 @@ const Schema = mongoose.Schema;
 const PostSchema = new Schema ({
     creatorId: {
         type: mongoose.Schema.Types.ObjectId, ref: "User",
-    //    required: true,
-    //    unique: true
     },
+    commentsId:[ {
+        type: mongoose.Schema.Types.ObjectId, ref: "Comment",
+    }],
     title: {
         type: String,
         required: [true,'El titulo es obligatorio introducirlo'],

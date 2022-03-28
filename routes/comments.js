@@ -4,7 +4,7 @@ const { authentication, isAdmin } = require('../middleware/authentication');
 const { isAuthor_Comment } = require('../middleware/isAuthor');
 const CommentController = require('../controllers/CommentController');
 
-router.post('/create', CommentController.create);
+router.post('/create', authentication,CommentController.create);
 router.get('/getAll', CommentController.getAllComments);
 router.get('/getSome', CommentController.getSomeComments);
 router.delete('/deleteId/:_id', authentication, isAuthor_Comment, CommentController.deleteCommentById);

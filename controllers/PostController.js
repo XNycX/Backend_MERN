@@ -23,7 +23,7 @@ PostController.create = async (req, res) => {
 PostController.getAllPosts = async (req,res) => {
 
     try {
-        res.json(await Post.find().populate('creatorId'));
+        res.json(await Post.find().populate('creatorId').populate('commentsId'));
     } catch (error) {
         res.status(409).json({ message: error.message });
     }
