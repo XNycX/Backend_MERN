@@ -4,7 +4,6 @@ const { authentication, isAdmin } = require('../middleware/authentication');
 const { isAuthor_Comment } = require('../middleware/isAuthor');
 const CommentController = require('../controllers/CommentController');
 
-// Recibe por body un json con los datos del post y los guarda en la BBDD
 router.post('/create', CommentController.create);
 router.get('/getAll', CommentController.getAllComment);
 router.get('/getSome', CommentController.getSomecomments);
@@ -13,5 +12,4 @@ router.post('/addLike/:_id', authentication, CommentController.likes);
 router.post('/unlike/:_id', authentication, CommentController.unlikes);
 router.put('/edit/:_id', authentication, isAuthor_Comment, CommentController.editComment);
 
-//Exporto router para que pueda ser importado desde otros ficheros una vez ha ejecutado la lógica de éste(siempre igual)
 module.exports = router;
