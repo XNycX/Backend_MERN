@@ -6,7 +6,8 @@ const CommentController = {};
 CommentController.create = async (req, res) => {
    
         const comment = {
-            creatorId : ObjectId(req.body.creatorId),
+            creatorId: ObjectId(req.user._id),
+            postId: ObjectId(req.body.postId),
             message : req.body.message,
             createdAt : new Date().toISOString()
         }

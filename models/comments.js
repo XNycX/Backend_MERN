@@ -7,6 +7,11 @@ const CommentSchema = new Schema ({
         required: true,
         unique: true
     },
+    postId: {
+        type: mongoose.Schema.Types.ObjectId, ref: "Post",
+        required: true,
+        unique: false
+    },
     message: {
         type: String,
         required: [true,'El mensaje es obligatorio introducirlo'],
