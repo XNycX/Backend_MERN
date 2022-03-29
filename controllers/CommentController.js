@@ -110,7 +110,7 @@ CommentController.likes = async (req, res) => {
       await Comment.findByIdAndUpdate(
          { _id }, {
              $set: {
-                 message: req.body.message
+                 message: req.body.message,
                     }
                 }, {returnNewDocument: true}
             )
