@@ -108,9 +108,9 @@ CommentController.likes = async (req, res) => {
 
     try {
       await Comment.updateOne(
-         { id: _id }, {
+         { _id: _id }, {
              $set: {
-                 message: req.body.message
+                 message: req.body.message,
                     }
                 }, {returnNewDocument: true}
             )

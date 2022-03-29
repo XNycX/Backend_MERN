@@ -1,4 +1,5 @@
 const Post = require("../models/post.js");
+const Comment = require("../models/comments.js");
 
 const isAuthor_Post = async (req, res, next) => {
   let idPost = req.params._id;
@@ -16,7 +17,7 @@ const isAuthor_Post = async (req, res, next) => {
      
   const isAuthor_Comment = async (req, res, next) => {
     try {
-      const comment = await Comment.findById(req.params._id);
+      const comment = await Comment.findOne(req.params._id);
       if (comment.creatorId.toString() !== req.user._id.toString()) {
         return res.status(403).send({ message: "No eres el creador de este comment" });
       }
