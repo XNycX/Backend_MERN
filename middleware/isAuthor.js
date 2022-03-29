@@ -1,4 +1,5 @@
 const Post = require("../models/post.js");
+const Comment = require("../models/comments.js");
 
 const isAuthor_Post = async (req, res, next) => {
   let idPost = req.params._id;
@@ -15,17 +16,18 @@ const isAuthor_Post = async (req, res, next) => {
   }};
      
   const isAuthor_Comment = async (req, res, next) => {
+    let idComment = req.params._id;
     try {
-      const comment = await Comment.findById(req.params._id);
+      const comment = await Comment.findById(idComment);
       if (comment.creatorId.toString() !== req.user._id.toString()) {
         return res.status(403).send({ message: "No eres el creador de este comment" });
       }
       next();
-    } catch (error) {
+    }catch (error) {
       console.error(error);
       return res.status(500).json({ msg: "Ha habido un problema al comprobar la autoría del comment", error: { name: error.name, message: error.message, detail: error }})
     }};
-  
+
 
 
 module.exports = { isAuthor_Post, isAuthor_Comment };
