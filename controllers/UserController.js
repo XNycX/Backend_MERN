@@ -82,7 +82,7 @@ UserController.getUserByNickname = async (req, res) => {
 };
 
 UserController.getUserInfo = async (req, res) => {
-  let _id = req.body._id;
+  let _id = req.user._id;
   try {
     res.json(await User.findOne({ _id }));
   } catch (error) {
