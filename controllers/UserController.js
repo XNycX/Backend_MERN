@@ -80,6 +80,15 @@ UserController.getUserByNickname = async (req, res) => {
     res.status(409).json({ message: error.message });
   }
 };
+
+UserController.getUserInfo = async (req, res) => {
+  let _id = req.body._id;
+  try {
+    res.json(await User.findOne({ _id }));
+  } catch (error) {
+    res.status(409).json({ message: error.message });
+  }
+};
 //Para seguir a otro usuario
 UserController.following = async (req, res) => {
   let _id = req.user._id;
@@ -195,7 +204,14 @@ UserController.updateUser = async (req, res) => {
     const users = await User.find();
     const nicknameExist = users.some(user => user.nickname == req.body.nickname)
     if (nicknameExist) {
-      res.send('Este nickname ya existe')
+      const userUpdated= await User.findByIdAndUpdate(id, {
+        $set: {
+          city: req.body.city,
+          image_path: req.body.image_path,
+        },
+      },
+      { new: true })
+      res.status(200).json({ msg: "Has modificado tu usuario salvo tu nickname que ya existe",userUpdated });
     } else {
       const userUpdated= await User.findByIdAndUpdate(id, {
          $set: {
