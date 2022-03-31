@@ -6,7 +6,7 @@ const PostController = require('../controllers/PostController');
 
 // http://localhost:5500/posts/create (usando un POST).
 // Recibe por body un json con los datos del post y los guarda en la BBDD
-router.post('/create', PostController.create);
+router.post('/create',authentication, PostController.create);
 router.get('/getAll', PostController.getAllPosts);
 router.get('/getSome', PostController.getSomePosts);
 router.delete('/deleteId/:_id', authentication, isAuthor_Post, PostController.deletePostById);
