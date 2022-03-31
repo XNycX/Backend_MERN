@@ -5,7 +5,7 @@ const PostController = {};
 
 PostController.create = async (req, res) => {
         const post = {
-            creatorId : ObjectId(req.body.creatorId),
+            creatorId : req.user._id,
             title : req.body.title,
             message : req.body.message,
             createdAt : new Date().toISOString()
