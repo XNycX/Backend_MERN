@@ -9,7 +9,7 @@ router.get('/confirm/:emailToken', UserController.confirmEmail);
 router.delete('/deleteId/:_id', authentication, UserController.deleteById);
 router.get('/', UserController.getAllUsers);
 router.get('/nickname', UserController.getUserByNickname);
-router.get('/info/:_id', UserController.getUserInfo);
+router.get('/info', authentication,UserController.getUserInfo);
 router.post('/following', authentication, UserController.following);
 router.post('/unfollowing', authentication, UserController.unfollowing);
 router.post('/followers', authentication, UserController.followers);
