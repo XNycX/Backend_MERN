@@ -9,7 +9,7 @@ const PostController = require('../controllers/PostController');
 router.post('/create',authentication, PostController.create);
 router.get('/getAll', PostController.getAllPosts);
 router.get('/getSome', PostController.getSomePosts);
-router.get('/getPost', PostController.getPostById);
+router.get('/getPost/:_id', PostController.getPostById);
 router.delete('/deleteId/:_id', authentication, isAuthor_Post, PostController.deletePostById);
 router.post('/addLike/:_id', authentication, PostController.likes);
 router.post('/unlike/:_id', authentication, PostController.unlikes);

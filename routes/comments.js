@@ -7,7 +7,7 @@ const CommentController = require('../controllers/CommentController');
 router.post('/create', authentication,CommentController.create);
 router.get('/getAll', CommentController.getAllComments);
 router.get('/getSome', CommentController.getSomeComments);
-router.get('/getComment', CommentController.getCommentById);
+router.get('/getComment/:_id', CommentController.getCommentById);
 router.delete('/deleteId/:_id', authentication, isAuthor_Comment, CommentController.deleteCommentById);
 router.post('/addLike/:_id', authentication, CommentController.likes);
 router.post('/unlike/:_id', authentication, CommentController.unlikes);
