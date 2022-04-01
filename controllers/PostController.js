@@ -39,6 +39,19 @@ PostController.getSomePosts = async (req,res) => {
     }
 };
 
+PostController.getPostById = async (req, res) => {
+    let _id = req.params._id;
+    try {
+      await Post.findById(
+        (_id ),
+        res.send({ message: `The post with id: ${_id} has been found succesfully`, _id })
+      );
+    } catch (error) {
+      res.send(error);
+    }
+  };
+
+
 PostController.deletePostById = async (req, res) => {
     let _id = req.params._id;
     try {
