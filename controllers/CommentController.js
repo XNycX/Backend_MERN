@@ -22,16 +22,11 @@ CommentController.create = async (req, res) => {
     }
     
 };
-CommentController.getCommentById = async (req, res) => {
-    let _id = req.params._id;
-    try {
-      await Comment.findById((_id),
-        res.send({ message: `The comment with id: ${_id} has been found succesfully`, _id })
-      );
-    } catch (error) {
-      res.send(error);
-    }
-  };
+
+// get comment by id with a populate
+
+
+
 
 CommentController.getAllComments = async (req,res) => {
 
