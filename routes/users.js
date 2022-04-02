@@ -8,7 +8,7 @@ router.post('/register', UserController.register);
 router.get('/confirm/:emailToken', UserController.confirmEmail);
 router.delete('/deleteId/:_id', authentication, UserController.deleteById);
 router.get('/', UserController.getAllUsers);
-router.get('/nickname', UserController.getUserByNickname);
+router.get('/nickname/:nickname', UserController.getUserByNickname);
 router.get('/info', authentication,UserController.getUserInfo);
 router.post('/following', authentication, UserController.following);
 router.post('/unfollowing', authentication, UserController.unfollowing);

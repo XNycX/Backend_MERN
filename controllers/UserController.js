@@ -73,9 +73,16 @@ UserController.getAllUsers = async (req, res) => {
 };
 
 UserController.getUserByNickname = async (req, res) => {
-  let nickname = req.body.nickname;
+  const nickname = new RegExp(`${req.params.nickname}`, 'i')
   try {
-    res.json(await User.findOne({ nickname }));
+    const users = await User.aggregate([
+      {
+          $match: {
+            nickname
+          }
+      }
+  ]);
+   res.send(users)
   } catch (error) {
     res.status(409).json({ message: error.message });
   }
