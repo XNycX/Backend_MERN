@@ -96,88 +96,6 @@ UserController.getUserInfo = async (req, res) => {
     res.status(409).json({ message: error.message });
   }
 };
-//Para seguir a otro usuario
-UserController.following = async (req, res) => {
-  let _id = req.user._id;
-
-  let id_userToFollow = req.body.following;
-
-  // Enviar Mensaje al usuario que ya sigue a esa persona
-  try {
-    await User.findOneAndUpdate(
-      { _id: _id },
-      {
-        $push: {
-          following: id_userToFollow
-        },
-      }
-    );
-    res.send("Has Comenzado a seguir a esta persona");
-  } catch (error) {
-    res.send(error);
-  }
-};
-//Para añadir un seguidor a un usuario
-UserController.followers = async (req, res) => {
-  let _id = req.user._id;
-
-  let id_follower = req.body.follower;
-
-  // Enviar Mensaje al usuario que ya sigue a esa persona
-  try {
-    await User.findOneAndUpdate(
-      { _id: _id },
-      {
-        $push: {
-         id_follower
-        },
-      }
-    );
-    res.send(`Te sigue ${id_follower}`);
-  } catch (error) {
-    res.send(error);
-  }
-};
-//Para quitar un seguidor a un usuario
-UserController.unfollowed = async (req, res) => {
-  let _id = req.user._id;
-
-  let id_follower = req.body.follower;
-
-  try {
-    await User.findOneAndUpdate(
-      { _id: _id },
-      {
-        $pull: {
-          followers: id_follower
-        },
-      }
-    );
-    res.send(`Te ha dejado de seguir ${id_follower}.`);
-  } catch (error) {
-    res.send(error);
-  }
-};
-//Para dejar de seguir a un usuario
-UserController.unfollowing = async (req, res) => {
-  let _id = req.user._id;
-
-  let id_userToUnfollow = req.body.unfollowing;
-
-  try {
-    await User.findOneAndUpdate(
-      { _id: _id },
-      {
-        $pull: {
-           id_userToUnfollow
-        },
-      }
-    );
-    res.send(`Has dejado de seguir a ${id_userToUnfollow}.`);
-  } catch (error) {
-    res.send(error);
-  }
-};
 UserController.login = (req, res) => {
   let password = req.body.password;
   User.findOne({ email: req.body.email }).then((user) => {
@@ -272,5 +190,51 @@ UserController.updatePassword = (req, res) => {
       res.send(error);
     });
 };
+
+//follow a user
+UserController.follow = async (req, res) => {
+  if (req.user._id !== req.params._id){
+    try {
+      const targetUser = await User.findById(req.params._id)
+      const currentUser = await User.findById(req.user._id)
+        if (!currentUser.following.includes(req.params._id)) {
+            await targetUser.updateOne ({ $push: { followers: req.user._id } })
+            await currentUser.updateOne ({ $push: { following: req.params._id } })
+            res.status(200).send({ message: "Usuario seguido con exito" })
+        }
+        else {
+            res.status(403).send({ message: "¡Ya sigues a este usuario!" })
+        }
+    } catch (error) {
+        res.status(500).send({ error, message: "Ha habido un problema intentando seguir al usuario" })
+    }
+}
+else {
+    res.status(400).send({ message: "No puedes seguirte a ti mismo" })
+}
+},
+UserController.unfollow = async (req, res) => {
+if (req.user._id !== req.params._id){
+  try {
+      const targetUser = await User.findById(req.params._id)
+      const currentUser = await User.findById(req.user._id)
+      if (currentUser.following.includes(req.params._id)) {
+          await targetUser.updateOne ({ $pull: { followers: req.user._id } })
+          await currentUser.updateOne ({ $pull: { following: req.params._id } })
+          res.status(200).send({ message: "Has dejado de seguir al usuario con éxito" })
+      }
+      else {
+          res.status(403).send({ message: "¡No puedes dejar de seguir si aún no sigues al usuario!" })
+      }
+  } catch (error) {
+      res.status(500).send({ error, message: "Ha habido un problema al intentar dejar de seguir al usuario" })
+  }
+}
+else {
+  res.status(400).send({ message: "No puedes dejar de seguirte a ti mismo" })
+}
+},
+  
+
 
 module.exports = UserController;

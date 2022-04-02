@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const ObjectId = mongoose.SchemaTypes.ObjectId;
 
 const UserSchema = new Schema ({
     email: {
@@ -34,21 +35,23 @@ const UserSchema = new Schema ({
         required: false,
         default: ""
     },
-    followers: {
-        type: Array,
-        required: false,
-        default: []
-    },
-    following: {
-        type: Array,
-        required: false,
-        default: []
-    },
+    // followers: {
+    //     type: Array,
+    //     required: false,
+    //     default: []
+    // },
+    // following: {
+    //     type: Array,
+    //     required: false,
+    //     default: []
+    // },
     confirmed: {  
         type: Boolean,
         required: true,
         default: false
     },
+    followers: [{ type: ObjectId, ref: 'User' }],
+    following: [{ type: ObjectId, ref: 'User' }]
 });
 
 const User = mongoose.model('User', UserSchema);

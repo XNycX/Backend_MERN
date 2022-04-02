@@ -10,13 +10,11 @@ router.delete('/deleteId/:_id', authentication, UserController.deleteById);
 router.get('/', UserController.getAllUsers);
 router.get('/nickname/:nickname', UserController.getUserByNickname);
 router.get('/info', authentication,UserController.getUserInfo);
-router.post('/following', authentication, UserController.following);
-router.post('/unfollowing', authentication, UserController.unfollowing);
-router.post('/followers', authentication, UserController.followers);
-router.post('/unfollowed', authentication, UserController.unfollowed);
 router.post('/login', UserController.login);
 router.put('/edit', authentication, UserController.updateUser);
-router.put('/updatePassword',authentication, UserController.updatePassword);
+router.put('/updatePassword', authentication, UserController.updatePassword);
+router.put('/follow/:_id', authentication, UserController.follow);
+router.put('/unfollow/:_id', authentication, UserController.unfollow);
 
 
 module.exports = router;
