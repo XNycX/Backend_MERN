@@ -129,7 +129,7 @@ UserController.followers = async (req, res) => {
       { _id: _id },
       {
         $push: {
-          followers: id_follower
+         id_follower
         },
       }
     );
@@ -169,7 +169,7 @@ UserController.unfollowing = async (req, res) => {
       { _id: _id },
       {
         $pull: {
-          following: id_userToUnfollow
+           id_userToUnfollow
         },
       }
     );
