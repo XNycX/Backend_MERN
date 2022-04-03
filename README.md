@@ -52,6 +52,11 @@ El sistema puede realizar las siguientes acciones:
 
 Para ver mas detalladamente el funcionamiento de cada endpoints consultar el siguiente enlace:
 
+Para descargarlo en tu Postman: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/18402582-50745dde-9e68-4dbc-a346-6adb081757a8?action=collection%2Ffork&collection-url=entityId%3D18402582-50745dde-9e68-4dbc-a346-6adb081757a8%26entityType%3Dcollection%26workspaceId%3D6405bb6e-2574-41c3-9517-15ee2ff3211a)
+
+Para visualizar simplemente los endpoints:
+https://documenter.getpostman.com/view/18402582/UVyswbBV#0d12372f-6f11-4a60-9af3-1b88aa2b42bd
+
 <hr>
 
 ## Autores ✒️
