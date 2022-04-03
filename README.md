@@ -46,7 +46,6 @@ El sistema puede realizar las siguientes acciones:
 - CRUD Users
 - Encriptación de ciertos campos mediante Bcryptjs
 - Proceso de autenticación mediante jsonwebtoken
-- El sistema permite administrar a los usuarios por roles
 - Registro mediante email de confirmación
 - Login al realizar confirmación de email
 
