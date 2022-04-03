@@ -33,7 +33,7 @@ UserController.register = async (req, res) => {
                       <a href="${url}"> Click para confirmar tu registro</a> `,
     });
     res.send(
-      `${user.nickname}, Te hemos enviado un correo para confirmar el registro en la web de la red social, recuerda revisar tu carpeta SPAM si no ves nuestro correo`
+      `${user.nickname}, We have sent to you an email to confirm your registration remember to check your SPAM folder if you don't see it`
     );
   } catch (error) {
     res.status(400).send(error);
